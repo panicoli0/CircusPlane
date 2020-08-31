@@ -7,9 +7,12 @@ public class PlayerControllerX : MonoBehaviour
     public bool gameOver;
     public bool isOnGround = true;
 
+    public float speed = 5.0f;
     public float floatForce;
     private float gravityModifier = 1.5f;
     private Rigidbody playerRb;
+    public float horizontalInput;
+    public float rotationSpeed;
 
     public ParticleSystem explosionParticle;
     public ParticleSystem fireworksParticle;
@@ -34,6 +37,13 @@ public class PlayerControllerX : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Player move forward at constant speed 
+        transform.Translate(Vector3.right * speed * Time.deltaTime);
+        // get the user's vertical input
+        horizontalInput = Input.GetAxis("Horizontal");
+        //Mover al player de izq a der
+        transform.Rotate(Vector3.left, rotationSpeed * horizontalInput * Time.deltaTime);
+
         // While space is pressed and player is low enough, float up
         if (Input.GetKey(KeyCode.Space) && !gameOver)
         {
