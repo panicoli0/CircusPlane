@@ -35,14 +35,15 @@ public class PlayerControllerX : MonoBehaviour
     }
 
     // Update is called once per frame
+    // El player se mueve verticalmente con la barra y horizontalmente con las rows
     void Update()
     {
         //Player move forward at constant speed 
-        transform.Translate(Vector3.right * speed * Time.deltaTime);
+        transform.Translate(Vector3.forward * speed * Time.deltaTime);
         // get the user's vertical input
-        horizontalInput = Input.GetAxis("Horizontal");
+        float horizontalInput = Input.GetAxis("Horizontal");
         //Mover al player de izq a der
-        transform.Rotate(Vector3.left, rotationSpeed * horizontalInput * Time.deltaTime);
+        playerRb.AddForce(Vector3.right * speed * horizontalInput);
 
         // While space is pressed and player is low enough, float up
         if (Input.GetKey(KeyCode.Space) && !gameOver)
