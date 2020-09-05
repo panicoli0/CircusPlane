@@ -8,6 +8,7 @@ public class PlayerControllerX : MonoBehaviour
     public bool isOnGround = true;
 
     public float speed = 5.0f;
+    public float turnSpeed = 25.0f;
     public float floatForce;
     private float gravityModifier = 1.5f;
     private Rigidbody playerRb;
@@ -48,8 +49,13 @@ public class PlayerControllerX : MonoBehaviour
         // While space is pressed and player is low enough, float up
         if (Input.GetKey(KeyCode.Space) && !gameOver)
         {
-            playerRb.AddForce(Vector3.up * floatForce);
+            transform.Rotate(Vector3.left * turnSpeed * rotationSpeed * Time.deltaTime);
+            playerRb.AddForce(Vector3.up * floatForce * 3);
+            
             isOnGround = false;
+        } else {
+            playerRb.AddForce(Vector3.down * floatForce);
+            transform.Rotate(Vector3.right * turnSpeed * rotationSpeed * Time.deltaTime);
         }
     }
 
