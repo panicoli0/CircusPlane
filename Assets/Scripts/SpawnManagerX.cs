@@ -14,7 +14,7 @@ public class SpawnManagerX : MonoBehaviour
     void Start()
     {
         InvokeRepeating("SpawnObjects", spawnDelay, spawnInterval);
-        playerControllerScript = GameObject.Find("Player").GetComponent<PlayerControllerX>();
+        playerControllerScript = GameObject.Find("Plane").GetComponent<PlayerControllerX>();
     }
 
     // Spawn obstacles
