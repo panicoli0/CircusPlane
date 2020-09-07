@@ -41,10 +41,14 @@ public class PlayerControllerX : MonoBehaviour
     {
         //Player move forward at constant speed 
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
+
         // get the user's vertical input
         float horizontalInput = Input.GetAxis("Horizontal");
+
         //Mover al player de izq a der
-        playerRb.AddForce(Vector3.right * speed * horizontalInput);
+        
+        transform.Rotate(Vector3.up * rotationSpeed * turnSpeed * horizontalInput * Time.deltaTime);
+        transform.Rotate(Vector3.back * rotationSpeed * turnSpeed*3 * horizontalInput * Time.deltaTime);
 
         // While space is pressed and player is low enough, float up
         if (Input.GetKey(KeyCode.Space) && !gameOver)
